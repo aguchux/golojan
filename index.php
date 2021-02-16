@@ -12,6 +12,21 @@ $Route->add('/', function () {
 }, 'GET');
 //Home page//
 
+
+$Route->add('/{shop}', function ($shop) {
+    $Core = new Apps\Core;
+    $Template = new Apps\Template("/auth/login");
+    $Template->addheader("layouts.auth.header");
+    $Template->addfooter("layouts.auth.footer");
+    $Template->assign("title", "Golojan | Back Office");
+    $accid = $Template->storage("accid");
+    $root = $Core->UserInfo($accid, "root");
+    $Core->Relocation($accid);
+    $Template->assign("menukey", "dashboard");
+    $Template->render("dashboard.{$root}.dashboard");
+}, 'GET');
+
+
 require_once DOT . "/_public/shop.php";
 
 

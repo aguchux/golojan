@@ -40,9 +40,9 @@ define("auth_session_key", "logged_in");
 define("auth_url", "/auth/login");
 
 define("basedomain", "https://golojan.net/");
-define("domain", "https://myhq.golojan.net/");
+define("domain", "https://golojan.net/");
 
-define("db_host", "localhost");
+define("db_host", "107.182.235.44");
 define("db_user", "golojan_mlms");
 define("db_password", "q0DU50X8pwzSCAlttGOryk27XBxjylXCD3nDm");
 define("db_name", "golojan_mlms");
