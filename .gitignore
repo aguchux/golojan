@@ -1,0 +1,4 @@
+/vendor
+/config
+.htaccess
+config.lock
