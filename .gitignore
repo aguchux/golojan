@@ -4,7 +4,6 @@ martfury/
 .vscode/
 config/
 composer.lock
-config.php
 .htaccess
 php.ini
 .user.ini
