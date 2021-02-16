@@ -1,4 +1,10 @@
-/vendor
-/config
+vendor/
+_store/
+martfury/
+.vscode/
+config/
+composer.lock
+config.php
 .htaccess
-config.lock
+php.ini
+.user.ini
