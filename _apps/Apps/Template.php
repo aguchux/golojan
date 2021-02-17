@@ -16,7 +16,7 @@ class Template extends Session
 	public $version = version;
 
 	public $Device;
-	
+
 	public $variables = array();
 	public $errors = array();
 
@@ -47,6 +47,7 @@ class Template extends Session
 	public $output = '';
 	public $header_file = '';
 	public $footer_file = '';
+	public $web_parts = array();
 	public $robots = '';
 
 	public $header_css_html = '';
@@ -63,7 +64,8 @@ class Template extends Session
 	public $footer_jss_scripts = '';
 	public $footer_css_scripts = '';
 
-
+	public $theme = store_default_theme;
+	public $theme_path;
 
 	public $tempArr = array();
 	public $template_extension = template_file_extension;
@@ -122,10 +124,21 @@ class Template extends Session
 	}
 
 
-	
+
 	function SetDevice(Device $Device)
 	{
 		$this->Device = $Device;
+	}
+
+
+	/**
+	 * @param string $theme 
+	 * @return void 
+	 */
+	function theme(String $theme)
+	{
+		$this->theme = $theme;
+		$this->theme_path = "webparts.{$theme}.";
 	}
 
 
@@ -331,6 +344,7 @@ class Template extends Session
 		return print($output);
 	}
 
+
 	public function SetupPage($suggestions, $variables = array())
 	{
 
@@ -362,36 +376,53 @@ class Template extends Session
 	}
 
 
-	public function add($template, $show = true)
-	{
 
-		$suggestions_arr = explode(".", $template);
-		$suggestions_arr_count = (int)count($suggestions_arr);
-		$suggestions_arr_count_dir = (int)($suggestions_arr_count - 2);
-		$suggestions_arr_count_file = (int)($suggestions_arr_count - 1);
-		$suggestions_dir = '';
-		for ($i = 0; $i <= $suggestions_arr_count_dir; ++$i) {
-			$suggestions_dir .= "{$suggestions_arr[$i]}/";
+	/**
+	 * @param mixed $header 
+	 * @param array $params 
+	 * @return void 
+	 */
+	public function addpart($header, array $params = array())
+	{
+		//Clean the resources//
+		$header = trim($header);
+		$part = str_replace($this->theme_path,'', $header);
+		$header = $this->theme_path . $part;
+		//Clean the resources//
+
+		$header_arr = explode(".", $header);
+		$header_arr_count = (int)count($header_arr);
+		$header_arr_count_dir = (int)($header_arr_count - 2);
+		$header_arr_count_file = (int)($header_arr_count - 1);
+		$header_dir = '';
+		for ($i = 0; $i <= $header_arr_count_dir; ++$i) {
+			$header_dir .= "{$header_arr[$i]}/";
 		}
-		$suggestions_dir = rtrim($suggestions_dir, '/');
-		$suggestions = $suggestions_arr[$suggestions_arr_count_file];
+		$header_dir = rtrim($header_dir, '/');
+		$suggestions = $header_arr[$header_arr_count_file];
 		if (!is_array($suggestions)) {
 			$suggestions = array($suggestions);
 		}
 		$suggestions = array_reverse($suggestions);
 		$found = false;
 		foreach ($suggestions as $suggestion) {
-			$file = "{$this->folder}/{$suggestions_dir}/{$suggestion}.{$this->template_extension}";
+			$file = "{$this->folder}/{$header_dir}/{$suggestion}.{$this->template_extension}";
 			if (file_exists($file)) {
-				if ($show) {
-					require $file;
-				}
+				$this->web_parts[] = $file;
 				break;
 			}
 		}
+		if (is_array($params) && array_count_values($params)) {
+			foreach ($params as $pKEy => $pVal) {
+				$this->assign($pKEy, $pVal);
+			}
+			$suggestions = array($suggestions);
+		}
 	}
 
-	public function addheader($header)
+
+
+	public function addheader($header, array $params = array())
 	{
 		$header_arr = explode(".", $header);
 		$header_arr_count = (int)count($header_arr);
@@ -415,9 +446,17 @@ class Template extends Session
 				break;
 			}
 		}
+		if (is_array($params) && array_count_values($params)) {
+			foreach ($params as $pKEy => $pVal) {
+				$this->assign($pKEy, $pVal);
+			}
+			$suggestions = array($suggestions);
+		}
 	}
 
-	public function addfooter($footer)
+
+
+	public function addfooter($footer, array $params = array())
 	{
 		$footer_arr = explode(".", $footer);
 		$footer_arr_count = (int)count($footer_arr);
@@ -440,6 +479,12 @@ class Template extends Session
 				$this->footer_file = $file;
 				break;
 			}
+		}
+		if (is_array($params) && array_count_values($params)) {
+			foreach ($params as $pKEy => $pVal) {
+				$this->assign($pKEy, $pVal);
+			}
+			$suggestions = array($suggestions);
 		}
 	}
 
@@ -549,17 +594,6 @@ class Template extends Session
 			}
 		}
 		return $this->footer_jss_html;
-	}
-
-	public function addjQuery($scripts)
-	{
-		$qjss_html = "<script type=\"text/javascript\" async=\"true\" runat=\"server\" language=\"javascript\">\r\n";
-		$qjss_html .= "(function( $ ){\r\n";
-		$qjss_html .= $scripts;
-		$qjss_html .= "});\r\n";
-		$qjss_html .= "</script>\r\n";
-		$this->footer_jss_scripts .= $qjss_html;
-		return $qjss_html;
 	}
 
 	public function LoadHeader($domain = domain)
@@ -675,6 +709,7 @@ class Template extends Session
 		$public_dir = $this->public_dir;
 		$templates_dir = $this->templates_dir;
 		$header_files = "";
+		$web_parts = "";
 		$robots = $this->robots;
 		$footer_files = "";
 		$Core = $this->Core;
@@ -688,6 +723,17 @@ class Template extends Session
 			include $this->header_file;
 		}
 		include func_get_args()[0];
+
+		// Web Parts
+		if (count($this->web_parts)) {
+			foreach ($this->web_parts as $webpart) {
+				if (file_exists($webpart)) {
+					include $webpart;
+				}
+			}
+		}
+		// Web Parts
+
 		if (file_exists($this->footer_file)) {
 			include $this->footer_file;
 		}

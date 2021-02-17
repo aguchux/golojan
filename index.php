@@ -6,16 +6,22 @@ require_once DOT . "/bootstrap.php";
 
 //Home page//
 $Route->add('/', function () {
-    
+
     $Template = new Apps\Template;
-    
+
     $Template->addheader("layouts.themes.benito.h1.header");
     $Template->addfooter("layouts.themes.benito.h1.footer");
     
+    $Template->theme("benito");
+    $Template->addpart("menu");
+    $Template->addpart("categories");
+    $Template->addpart("sliders", ["slidetitle" => "We are a", "slidedescription" => "that create high quality Magent"]);
+
+    
+
     $Template->assign("title", "Golojan | Shop");
 
     $Template->render("home");
-
 }, 'GET');
 //Home page//
 
@@ -49,7 +55,7 @@ $Route->add('/device/connection', function () {
         $Dinfo['browser'] = $Device->get_browser();
         $Dinfo['device'] = $Device->get_device();
         $Dinfo['ip'] = $Device->get_ip();
-    }else{
+    } else {
         $Dinfo['connected'] = 0;
     }
     $Dinfo = json_encode($Dinfo);

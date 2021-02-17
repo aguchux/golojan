@@ -100,3 +100,5 @@ define("min_withdrawal_amount", 50);
 
 define("product_title_count", 80);
 define("product_description_count", 120);
+
+define("store_default_theme", "benito");
