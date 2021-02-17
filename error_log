@@ -1,0 +1,104 @@
+[17-Feb-2021 09:25:10 UTC] PHP Warning:  require(/home/golonet/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/golonet/public_html/bootstrap.php on line 10
+[17-Feb-2021 09:25:10 UTC] PHP Fatal error:  require(): Failed opening required '/home/golonet/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/golonet/public_html/bootstrap.php on line 10
+[17-Feb-2021 10:44:56 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 10:44:57 Africa/Lagos] PHP Notice:  Undefined index: logged_in in /home/golonet/public_html/_apps/Apps/Session.php on line 74
+[17-Feb-2021 10:44:57 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Session.php on line 75
+[17-Feb-2021 10:44:57 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Template.php on line 316
+[17-Feb-2021 11:02:05 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 11:14:42 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 11:17:36 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 11:44:11 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 11:59:22 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 12:06:54 Africa/Lagos] PHP Notice:  Undefined index: logged_in in /home/golonet/public_html/_apps/Apps/Session.php on line 74
+[17-Feb-2021 12:06:54 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Session.php on line 75
+[17-Feb-2021 12:06:54 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Template.php on line 316
+[17-Feb-2021 12:06:54 Africa/Lagos] PHP Notice:  Undefined index: logged_in in /home/golonet/public_html/_apps/Apps/Session.php on line 74
+[17-Feb-2021 12:06:54 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Session.php on line 75
+[17-Feb-2021 12:06:54 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Template.php on line 316
+[17-Feb-2021 12:06:59 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 13:14:19 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 13:56:40 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 14:09:54 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 14:22:28 Africa/Lagos] PHP Notice:  Undefined index: logged_in in /home/golonet/public_html/_apps/Apps/Session.php on line 74
+[17-Feb-2021 14:22:28 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Session.php on line 75
+[17-Feb-2021 14:22:28 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Template.php on line 316
+[17-Feb-2021 14:36:02 Africa/Lagos] PHP Notice:  Undefined index: logged_in in /home/golonet/public_html/_apps/Apps/Session.php on line 74
+[17-Feb-2021 14:36:02 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Session.php on line 75
+[17-Feb-2021 14:36:02 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Template.php on line 316
+[17-Feb-2021 15:00:30 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 15:01:35 Africa/Lagos] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/golonet/public_html/index.php:11
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/golonet/public_html/_apps/Apps/Route.php(135): call_user_func_array(Object(Closure), Array)
+#2 /home/golonet/public_html/index.php(70): Apps\Route->run('/')
+#3 {main}
+  thrown in /home/golonet/public_html/index.php on line 11
+[17-Feb-2021 15:01:35 Africa/Lagos] PHP Notice:  Undefined index: logged_in in /home/golonet/public_html/_apps/Apps/Session.php on line 74
+[17-Feb-2021 15:01:35 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Session.php on line 75
+[17-Feb-2021 15:01:35 Africa/Lagos] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/golonet/public_html/_apps/Apps/Session.php:74) in /home/golonet/public_html/_apps/Apps/Template.php on line 316

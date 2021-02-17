@@ -6,9 +6,16 @@ require_once DOT . "/bootstrap.php";
 
 //Home page//
 $Route->add('/', function () {
+    
     $Template = new Apps\Template;
-    $Template->assign("title", "Golojan | Back Office");
+    
+    $Template->addheader("layouts.themes.benito.h1.header");
+    $Template->addfooter("layouts.themes.benito.h1.footer");
+    
+    $Template->assign("title", "Golojan | Shop");
+
     $Template->render("home");
+
 }, 'GET');
 //Home page//
 

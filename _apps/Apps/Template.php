@@ -15,6 +15,8 @@ class Template extends Session
 
 	public $version = version;
 
+	public $Device;
+	
 	public $variables = array();
 	public $errors = array();
 
@@ -117,6 +119,13 @@ class Template extends Session
 		$this->token = $this->tokenize();
 		$this->config = $config_class;
 		$this->Core = new Core;
+	}
+
+
+	
+	function SetDevice(Device $Device)
+	{
+		$this->Device = $Device;
 	}
 
 

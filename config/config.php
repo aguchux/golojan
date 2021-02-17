@@ -22,7 +22,10 @@ define("templates_dir", "./templates/");
 define("templates_default", "404");
 define("templates_default_route", "/error/404/");
 define("vendor_dir", "./vendor/");
+
+
 define("assets_dir", "./templates/assets/");
+
 define("layouts_dir", "./templates/layouts/");
 define("store_dir", "./_store/");
 define("public_dir", "./_public/");
