@@ -9,6 +9,7 @@ namespace Apps;
 use stdClass;
 use \Apps\Model;
 use \Apps\MysqliDb;
+use \Cocur\Slugify\Slugify;
 
 use \Apps\EmailTemplate;
 
@@ -17,15 +18,34 @@ use function GuzzleHttp\json_decode;
 class Core extends Model
 {
 
+	public $accid = NULL;
+	public $storeurl = NULL;
+
 	public $token = NULL;
 	public $ngn = "&#x20A6;";
 
+	public $variables = array();
 
 	/** @return exit  */
 	public function __construct()
 	{
 		parent::__construct();
 	}
+
+	public function __set($key, $val)
+	{
+		$this->variables[$key] = $val;
+	}
+
+	public function __get($key)
+	{
+		if (array_key_exists($key, $this->variables)) {
+			return $this->variables[$key];
+		}
+		return false;
+	}
+
+
 
 	/**
 	 * @param int $length 
@@ -67,11 +87,9 @@ class Core extends Model
 	{
 		$curr_code = "&#36;";
 		$template = new Template;
-		if ($template->auth) {
-			$accid = $template->storage("accid");
-			$loc = $this->LocationInfo($this->UserInfo($accid, "location"));
-			$curr_code = $loc->currency_code;
-		}
+		$accid = $template->shopaccid;
+		$loc = $this->LocationInfo($this->UserInfo($accid, "location"));
+		$curr_code = $loc->currency_code;
 		$amount = number_format($amount, 2, ".", ",");
 		return "{$curr_code}{$amount}";
 	}
@@ -80,12 +98,10 @@ class Core extends Model
 	public function Monify($amount)
 	{
 		$curr_code = "&#36;";
-		$sess = new Template;
-		if ($sess->auth) {
-			$accid = $sess->storage("accid");
-			$loc = $this->LocationInfo($this->UserInfo($accid, "location"));
-			$curr_code = $loc->currency_code;
-		}
+		$template = new Template;
+		$accid = $template->shopaccid;
+		$loc = $this->LocationInfo($this->UserInfo($accid, "location"));
+		$curr_code = $loc->currency_code;
 		$amount = number_format($amount, 0, ".", ",");
 		return "{$curr_code}{$amount}";
 	}
@@ -118,6 +134,7 @@ class Core extends Model
 		return $amount;
 	}
 
+
 	/**
 	 * @param mixed $string 
 	 * @return string 
@@ -139,6 +156,8 @@ class Core extends Model
 		// -- Returns the slug
 		return strtolower(strtr($string, $table));
 	}
+
+
 
 	/** @return string  */
 	public function getURI()
@@ -794,6 +813,35 @@ class Core extends Model
 		return $html;
 	}
 
+	public function MainMenuCategories()
+	{
+		$html = "<ul class=\"vmenu-content vmenu-content2\">";
+		$MainCategories = mysqli_query($this->dbCon, "SELECT * FROM golojan_categories WHERE parentid='0' AND enabled='1' ");
+		while ($maincat = mysqli_fetch_object($MainCategories)) {
+			$html .= "<li class=\"menu-item\">";
+			$html .= "<a href=\"#\">{$maincat->category}<i class=\"ion-ios-arrow-right\"></i></a>";
+			$SubCategories = mysqli_query($this->dbCon, "SELECT * FROM golojan_categories WHERE parentid='{$maincat->id}' AND enabled='1' ");
+			$html .= "<ul class=\"verticale-mega-menu flex-wrap\">";
+			while ($subcat = mysqli_fetch_object($SubCategories)) {
+				$html .= "<li>";
+				$html .= "<a href=\"#\">";
+				$html .= "<strong class=\"text-primary\">{$subcat->category}</strong>";
+				$html .= "</a>";
+				$Categories = mysqli_query($this->dbCon, "SELECT * FROM golojan_categories WHERE parentid='$subcat->id' AND enabled='1' ");
+				$html .= "<ul class=\"submenu-item\">";
+				while ($cat = mysqli_fetch_object($Categories)) {
+					$html .= "<li><a class=\"my-0 py-0\" href=\"#\">{$cat->category}</a></li>";
+				}
+				$html .= "</ul>";
+				$html .= "</li>";
+			}
+			$html .= "</ul>";
+			$html .= "</li>";
+		}
+		return $html;
+	}
+
+
 
 	public function LoadMyCategories($accid, $catid = 0)
 	{
@@ -808,6 +856,185 @@ class Core extends Model
 		return $html;
 	}
 
+
+	public function MixedProductsByCategories(array $categories)
+	{
+		$Products = array();
+		$html = "";
+		$col = 1;
+		foreach ($categories as $category) {
+			$products_2cat = mysqli_query($this->dbCon, "SELECT * FROM golojan_products WHERE enabled=1 ORDER BY RAND() LIMIT 4");
+			while ($prdt = mysqli_fetch_object($products_2cat)) {
+				$Products[] = $prdt;
+			}
+		}
+		$pcount = (int)count($Products);
+
+
+
+		if($pcount){
+			for ($col = 0; $col <= $pcount; $col++) {
+				if ($col == 1) {
+					$P0 = $Products[0];
+					$P1 = $Products[1];
+					$html .= $this->CreateSwapSlide($P0, $P1);
+				} elseif ($col == 2) {
+					$P2 = $Products[2];
+					$P3 = $Products[3];
+					$html .= $this->CreateSwapSlide($P2, $P3);
+				} elseif ($col == 3) {
+					$P4 = $Products[4];
+					$P5 = $Products[5];
+					$html .= $this->CreateSwapSlide($P4, $P5);
+				} elseif ($col == 4) {
+					$P6 = $Products[6];
+					$P7 = $Products[7];
+					$html .= $this->CreateSwapSlide($P6, $P7);
+				} elseif ($col == 5) {
+					$P8 = $Products[8];
+					$P9 = $Products[9];
+					$html .= $this->CreateSwapSlide($P8, $P9);
+				} elseif ($col == 6) {
+					$P10 = $Products[10];
+					$P11 = $Products[11];
+					$html .= $this->CreateSwapSlide($P10, $P11);
+				} elseif ($col == 7) {
+					$P12 = $Products[12];
+					$P13 = $Products[13];
+					$html .= $this->CreateSwapSlide($P12, $P13);
+				} elseif ($col == 8) {
+					$P14 = $Products[14];
+					$P15 = $Products[15];
+					$html .= $this->CreateSwapSlide($P14, $P15);
+				}
+			}
+		}
+		return $html;
+	}
+
+
+	public function MixedProductsByCategory($category)
+	{
+		$Products = array();
+		$html = "";
+		$col = 1;
+		$products_2cat = mysqli_query($this->dbCon, "SELECT * FROM golojan_products WHERE enabled=1 ORDER BY RAND() LIMIT 16 ");
+		while ($prdt = mysqli_fetch_object($products_2cat)) {
+			$Products[] = $prdt;
+		}
+		$pcount = (int)count($Products);
+		
+
+		if($pcount){
+			for ($col = 0; $col <= $pcount; $col++) {
+				if ($col == 1) {
+					$P0 = $Products[0];
+					$P1 = $Products[1];
+					$html .= $this->CreateSwapSlide($P0, $P1);
+				} elseif ($col == 2) {
+					$P2 = $Products[2];
+					$P3 = $Products[3];
+					$html .= $this->CreateSwapSlide($P2, $P3);
+				} elseif ($col == 3) {
+					$P4 = $Products[4];
+					$P5 = $Products[5];
+					$html .= $this->CreateSwapSlide($P4, $P5);
+				} elseif ($col == 4) {
+					$P6 = $Products[6];
+					$P7 = $Products[7];
+					$html .= $this->CreateSwapSlide($P6, $P7);
+				} elseif ($col == 5) {
+					$P8 = $Products[8];
+					$P9 = $Products[9];
+					$html .= $this->CreateSwapSlide($P8, $P9);
+				} elseif ($col == 6) {
+					$P10 = $Products[10];
+					$P11 = $Products[11];
+					$html .= $this->CreateSwapSlide($P10, $P11);
+				} elseif ($col == 7) {
+					$P12 = $Products[12];
+					$P13 = $Products[13];
+					$html .= $this->CreateSwapSlide($P12, $P13);
+				} elseif ($col == 8) {
+					$P14 = $Products[14];
+					$P15 = $Products[15];
+					$html .= $this->CreateSwapSlide($P14, $P15);
+				}
+			}
+		}
+		return $html;
+
+	}
+	public function CreateSwapSlide($p1, $p2)
+	{
+
+		$Slug = new Slugify();
+		
+		$html = "";
+		$html .= "<div class=\"swiper-slide\">";
+
+		$html .= "<!-- media-list -->";
+		$html .= "<div class=\"media-list mb-4\">";
+		$html .= "<div class=\"media\">";
+		$html .= "<a class=\"thumb\" href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\"><img style=\"width:105px;\" src=\"{$p1->photo}\">";
+		$html .= "</a>";
+		$html .= "<div class=\"media-body\">";
+		$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p1->category, 'category') . "</a>";
+		$html .= "<h3 class=\"product-title\">";
+		$html .= "<a href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\">{$p1->name}</a>";
+		$html .= "</h3>";
+		$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p1->selling) . "</span>";
+		$html .= "</div>";
+		$html .= "</div>";
+		$html .= "</div>";
+		$html .= "<!-- media-list end -->";
+		
+
+		$html .= "<!-- media-list -->";
+		$html .= "<div class=\"media-list\">";
+		$html .= "<div class=\"media\">";
+		$html .= "<a class=\"thumb\" href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\"><img style=\"width:105px;\" src=\"{$p2->photo}\">";
+		$html .= "</a>";
+		$html .= "<div class=\"media-body\">";
+		$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p2->category, 'category') . "</a>";
+		$html .= "<h3 class=\"product-title\">";
+		$html .= "<a href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\">{$p2->name}</a>";
+		$html .= "</h3>";
+		$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p2->selling) . "</span>";
+		$html .= "</div>";
+		$html .= "</div>";
+		$html .= "</div>";
+		$html .= "<!-- media-list end -->";
+
+		$html .= "</div>";
+
+		return $html;
+	}
+
+
+	public function MainCategories()
+	{
+		$Categories = mysqli_query($this->dbCon, "SELECT * FROM golojan_categories WHERE parentid='0' AND enabled='1' ORDER BY RAND() ");
+		return $Categories;
+	}
+
+
+	public function SubCategories($catid)
+	{
+		$Categories = mysqli_query($this->dbCon, "SELECT * FROM golojan_categories WHERE parentid='$catid' AND enabled='1' ORDER BY RAND() LIMIT 4 ");
+		return $Categories;
+	}
+
+
+	public function SubCategoriesArray($catid)
+	{
+		$CategoriesArr = array();
+		$Categories = mysqli_query($this->dbCon, "SELECT id FROM golojan_categories WHERE parentid='$catid' AND enabled='1' ORDER BY RAND() LIMIT 4 ");
+		while ($cat = mysqli_fetch_object($Categories)) {
+			$CategoriesArr[] = $cat->id;
+		}
+		return $CategoriesArr;
+	}
 
 
 
@@ -837,11 +1064,21 @@ class Core extends Model
 	 * @param mixed $catid 
 	 * @return object|null 
 	 */
-	public function CategoryInfo($catid)
+	public function CategoryInfo($catid, $keyval = null)
 	{
-		$CategoryInfo = mysqli_query($this->dbCon, "select * from golojan_categories where id='$catid'");
-		$CategoryInfo = mysqli_fetch_object($CategoryInfo);
-		return $CategoryInfo;
+		if ($keyval == null) {
+			$CategoryInfo = mysqli_query($this->dbCon, "select * from golojan_categories where id='$catid'");
+			$CategoryInfo = mysqli_fetch_object($CategoryInfo);
+			return $CategoryInfo;
+		} else {
+			$CategoryInfo = mysqli_query($this->dbCon, "select {$keyval} from golojan_categories where id='$catid'");
+			$CategoryInfo = mysqli_fetch_object($CategoryInfo);
+			if (isset($CategoryInfo->$keyval)) {
+				return $CategoryInfo->$keyval;
+			} else {
+				return "De Golojan";
+			}
+		}
 	}
 
 	public function Products()
@@ -864,7 +1101,13 @@ class Core extends Model
 		return $Productinfo;
 	}
 
-	
+
+	public function ListProductFeatures($productid)
+	{
+		$ListProductFeatures = mysqli_query($this->dbCon, "SELECT * FROM golojan_products_features WHERE productid='$productid' ");
+		return $ListProductFeatures;
+	}
+
 	public function CategoryProducts($catid = 0)
 	{
 		if ($catid == 0) {
@@ -2151,9 +2394,9 @@ class Core extends Model
 
 
 	// Merchants & Products//
-	public function MerchantAddProduct($accid, $title, $description, $main_category, $sub_category, $bulkprice, $retailprice, $photo, $photos, $enable_pos_sales)
+	public function MerchantAddProduct($accid, $title, $description, $main_category, $sub_category, $category, $bulkprice, $retailprice, $photo, $photos, $enable_pos_sales)
 	{
-		mysqli_query($this->dbCon, "INSERT INTO golojan_products(accid,name,description,maincategory,category,bulkprice,retailprice,selling,photo,photos,enable_pos_sales) VALUES('$accid','$title','$description','$main_category','$sub_category','$bulkprice','$retailprice','$retailprice','$photo','$photos','$enable_pos_sales')");
+		mysqli_query($this->dbCon, "INSERT INTO golojan_products(accid,name,description,maincategory,subcategory,category,bulkprice,retailprice,selling,photo,photos,enable_pos_sales) VALUES('$accid','$title','$description','$main_category','$sub_category','$category','$bulkprice','$retailprice','$retailprice','$photo','$photos','$enable_pos_sales')");
 		return (int)$this->getLastId();
 	}
 
@@ -2175,6 +2418,16 @@ class Core extends Model
 	{
 		$Locations = mysqli_query($this->dbCon, "SELECT * FROM golojan_locations WHERE enabled='1'");
 		return $Locations;
+	}
+
+	public  function LocationDropList()
+	{
+		$Locations = mysqli_query($this->dbCon, "SELECT * FROM golojan_locations WHERE enabled='1'");
+		$html = "";
+		while ($location = mysqli_fetch_object($Locations)) {
+			$html .= "<li><a class=\"dropdown-item\" href=\"#\"><img class=\"mr-2\" src=\"_store/flags/tiny/{$location->flag}.png\" height=\"17px\" alt=\"{$location->location}\"> &nbsp;{$location->location}</a></li>";
+		}
+		return $html;
 	}
 
 
