@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Yabacon\\' => array($vendorDir . '/yabacon/paystack-php/src'),
+    'Cocur\\Slugify\\' => array($vendorDir . '/cocur/slugify/src'),
     'Apps\\' => array($baseDir . '/_apps', $baseDir . '/_apps/Apps'),
 );

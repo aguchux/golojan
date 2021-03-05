@@ -42,8 +42,8 @@ define("session_delete_timout", 30);
 define("auth_session_key", "logged_in");
 define("auth_url", "/auth/login");
 
-define("basedomain", "https://golojan.net/");
-define("domain", "https://golojan.net/");
+define("basedomain", "https://golojan.com/");
+define("domain", "https://golojan.com/");
 
 define("db_host", "107.182.235.44");
 define("db_user", "golojan_mlms");
@@ -91,8 +91,8 @@ define("APIEnvironmentVariable", "CLOUDINARY_URL=cloudinary://981315561269929:EY
 define("initial_store_capacity", 2000000);
 define("enable_DKIM_keys", true);
 
-define("root_accid", 12000);
-define("root_referrer", 12000);
+define("root_accid", 10000);
+define("root_referrer", 10000);
 
 define("min_transfer_amount", 50);
 define("min_funding_amount", 50);
@@ -102,3 +102,17 @@ define("product_title_count", 80);
 define("product_description_count", 120);
 
 define("store_default_theme", "benito");
+
+define("seo_title", "Buy, Sell & Earn Online | Golojan Online Shopping");
+define("seo_description", "");
+define("seo_keywords", "Shop for electronics, Golojan, men and women fashion, household equipments, games, appliances, toys, computers, phones and accessories, great online shopping sites to buy from, online shopping, buy now pay later, you break it we fix it, buyer protection guaranteed, online shopping in nigeria, online shopping sites with the best prices, online shopping sites, online shopping sites in nigeria, online shopping websites, online shopping Malls, Golojan online shopping mall, online shopping stores in Nigeria, Nigerias number one online shopping mall, online shopping in Nigeria, online shopping Mall, order online, purchase genuine products, top brands, fast shipping, 100% satisfaction");
+define("og_title", "Buy, Sell & Earn Online | Golojan Online Shopping");
+define("og_description", "");
+define("og_url", "https://golojan.com/");
+define("og_image", "https://golojan.com/assets/socialimage.jpg");
+define("og_keywords", "Shop for electronics, Golojan, men and women fashion, household equipments, games, appliances, toys, computers, phones and accessories, great online shopping sites to buy from, online shopping, buy now pay later, you break it we fix it, buyer protection guaranteed, online shopping in nigeria, online shopping sites with the best prices, online shopping sites, online shopping sites in nigeria, online shopping websites, online shopping Malls, Golojan online shopping mall, online shopping stores in Nigeria, Nigerias number one online shopping mall, online shopping in Nigeria, online shopping Mall, order online, purchase genuine products, top brands, fast shipping, 100% satisfaction");
+define("twitter_title", "Buy, Sell & Earn Online | Golojan Online Shopping");
+define("twitter_description", "");
+define("twitter_url", "https://golojan.com/");
+define("twitter_image", "https://golojan.com/assets/socialimage.jpg");
+define("twitter_image_alt", "");

@@ -13,6 +13,11 @@ use stdClass;
 class Template extends Session
 {
 
+	public $shopaccid = root_accid;
+	
+	public $accid = null;
+	public $storeurl = NULL;
+
 	public $version = version;
 
 	public $Device;
@@ -66,6 +71,7 @@ class Template extends Session
 
 	public $theme = store_default_theme;
 	public $theme_path;
+	public $render_path;
 
 	public $tempArr = array();
 	public $template_extension = template_file_extension;
@@ -86,9 +92,12 @@ class Template extends Session
 	{
 
 		parent::__construct($auth_url);
+		
+		if($this->storage("shopaccid")!==null){
+			$this->accid = $this->storage("shopaccid");
+		}
 
 		$this->config = $this->GetSettings();
-
 		if (isset($this->data[auth_session_key])) {
 			//user is logged in//
 			if (isset($this->data['auth_time'])) {
@@ -108,7 +117,6 @@ class Template extends Session
 			}
 			//user is logged in//
 		}
-
 
 		$this->set_folder($this->templates_dir);
 		$config = get_defined_constants(true);
@@ -138,9 +146,9 @@ class Template extends Session
 	function theme(String $theme)
 	{
 		$this->theme = $theme;
-		$this->theme_path = "webparts.{$theme}.";
+		$this->theme_path = "webparts.themes.{$theme}.";
+		$this->render_path = "themes.{$theme}.";
 	}
-
 
 	/**
 	 * @param mixed $posted_array 
@@ -333,7 +341,9 @@ class Template extends Session
 
 	public function render($suggestions, $variables = array())
 	{
-		$template = $this->search_template($suggestions);
+		$search = $this->render_path . $suggestions;
+		$template = $this->search_template($search);
+
 		$this->template_file = $suggestions;
 		if ($template) {
 			$output = $this->render_template($template, $variables);
@@ -382,11 +392,11 @@ class Template extends Session
 	 * @param array $params 
 	 * @return void 
 	 */
-	public function addpart($header, array $params = array())
+	public function addpart($uid,$header, array $params = array())
 	{
 		//Clean the resources//
 		$header = trim($header);
-		$part = str_replace($this->theme_path,'', $header);
+		$part = str_replace($this->theme_path, '', $header);
 		$header = $this->theme_path . $part;
 		//Clean the resources//
 
@@ -412,12 +422,14 @@ class Template extends Session
 				break;
 			}
 		}
-		if (is_array($params) && array_count_values($params)) {
+		//Prepare Variables//
+		if (is_array($params) && count($params)) {
 			foreach ($params as $pKEy => $pVal) {
-				$this->assign($pKEy, $pVal);
+				$this->assign("{$pKEy}", $pVal);
 			}
-			$suggestions = array($suggestions);
 		}
+		//Prepare Variables//
+
 	}
 
 
@@ -487,8 +499,6 @@ class Template extends Session
 			$suggestions = array($suggestions);
 		}
 	}
-
-
 
 	public function addcss($css_arr_data = array())
 	{

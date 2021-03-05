@@ -7,40 +7,29 @@ require_once DOT . "/bootstrap.php";
 //Home page//
 $Route->add('/', function () {
 
+    $Core = new Apps\Core;
     $Template = new Apps\Template;
+    $accid = $Template->shopaccid;
+    $Store = $Core->StoreInfo($accid);
+    $Template->theme($Store->theme);
+    $Template->addheader("layouts.themes.benito.header");
+    $Template->addfooter("layouts.themes.benito.footer");
+    $Template->assign("title", "Buy, Sell & Earn Online | Golojan Online Shopping");
+    $Template->addpart("Category_1", "Category_1");
+    $Template->addpart("Category_2", "Category_2");
+    $Template->addpart("banner1", "add_banners_3_col");
+    $Template->addpart("Category_2", "Category_3");
 
-    $Template->addheader("layouts.themes.benito.h1.header");
-    $Template->addfooter("layouts.themes.benito.h1.footer");
-    
-    $Template->theme("benito");
-    $Template->addpart("menu");
-    $Template->addpart("categories");
-    $Template->addpart("sliders", ["slidetitle" => "We are a", "slidedescription" => "that create high quality Magent"]);
+    $Template->render("default");
 
-    
-
-    $Template->assign("title", "Golojan | Shop");
-
-    $Template->render("home");
 }, 'GET');
 //Home page//
 
 
-$Route->add('/{shop}', function ($shop) {
-    $Core = new Apps\Core;
-    $Template = new Apps\Template("/auth/login");
-    $Template->addheader("layouts.auth.header");
-    $Template->addfooter("layouts.auth.footer");
-    $Template->assign("title", "Golojan | Back Office");
-    $accid = $Template->storage("accid");
-    $root = $Core->UserInfo($accid, "root");
-    $Core->Relocation($accid);
-    $Template->assign("menukey", "dashboard");
-    $Template->render("dashboard.{$root}.dashboard");
-}, 'GET');
 
 
-require_once DOT . "/_public/shop.php";
+require_once DOT . "/_public/products.php";
+
 
 
 
