@@ -18,7 +18,11 @@ $Route->add('/', function () {
     $Template->addpart("Category_1", "Category_1");
     $Template->addpart("Category_2", "Category_2");
     $Template->addpart("banner1", "add_banners_3_col");
-    $Template->addpart("Category_2", "Category_3");
+    $Template->addpart("Category_3", "Category_3");
+    $Template->addpart("Category_4", "Category_4");
+    $Template->addpart("Category_5", "Category_5");
+    $Template->addpart("Category_6", "Category_6");
+    $Template->addpart("Category_7", "Category_7");
 
     $Template->render("default");
 
