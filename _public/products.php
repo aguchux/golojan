@@ -15,6 +15,11 @@ $Route->add('/product/{product}/{slug}', function ($product,$slug) {
     $Template->assign("ProductInfo", $ProductInfo);
     $Template->assign("ProductFeatures", $Core->ListProductFeatures($ProductInfo->id));
 
+    $Photos_1 = $Photos_2 = json_decode($ProductInfo->photos);
+
+    $Template->assign("Photos_1", $Photos_1);
+    $Template->assign("Photos_2", $Photos_2);
+
     $Template->assign("MainCatInfo", $Core->ProductInfo($ProductInfo->maincategory));
     $Template->assign("SubCatInfo", $Core->ProductInfo($ProductInfo->subcategory));
     $Template->assign("CatInfo", $Core->ProductInfo($ProductInfo->category));

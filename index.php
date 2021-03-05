@@ -15,7 +15,6 @@ $Route->add('/', function () {
     $Template->addheader("layouts.themes.benito.header");
     $Template->addfooter("layouts.themes.benito.footer");
     $Template->assign("title", "Buy, Sell & Earn Online | Golojan Online Shopping");
-
     $Template->addpart("Category_1", "Category_1");
     $Template->addpart("Category_2", "Category_2");
     $Template->addpart("banner1", "add_banners_3_col");

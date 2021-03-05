@@ -861,51 +861,105 @@ class Core extends Model
 	{
 		$Products = array();
 		$html = "";
-		$col = 1;
 		foreach ($categories as $category) {
-			$products_2cat = mysqli_query($this->dbCon, "SELECT * FROM golojan_products WHERE enabled=1 ORDER BY RAND() LIMIT 4");
+			$products_2cat = mysqli_query($this->dbCon, "SELECT * FROM golojan_products WHERE subcategory='{$category}' ORDER BY RAND() LIMIT 4");
 			while ($prdt = mysqli_fetch_object($products_2cat)) {
 				$Products[] = $prdt;
 			}
 		}
-		$pcount = (int)count($Products);
-
-
-
-		if($pcount){
+		$pcount = (int) (count($Products));
+		if ($pcount) {
 			for ($col = 0; $col <= $pcount; $col++) {
-				if ($col == 1) {
-					$P0 = $Products[0];
-					$P1 = $Products[1];
-					$html .= $this->CreateSwapSlide($P0, $P1);
+				if ($col == 0) {
+					$html .= "";
+				} elseif ($col == 1) {
+
+					if ((int)isset($Products[0])) {
+						$P0 = $Products[0];
+						if ((int)isset($Products[1])) {
+							$P1 = $Products[1];
+							$html .= $this->CreateSwapItem($P0, $P1);
+						} else {
+							$html .= $this->CreateSwapItem($P0);
+						}
+					}
 				} elseif ($col == 2) {
-					$P2 = $Products[2];
-					$P3 = $Products[3];
-					$html .= $this->CreateSwapSlide($P2, $P3);
+
+					if ((int)isset($Products[2])) {
+						$P2 = $Products[2];
+						if ((int)isset($Products[3])) {
+							$P3 = $Products[3];
+							$html .= $this->CreateSwapItem($P2, $P3);
+						} else {
+							$html .= $this->CreateSwapItem($P2);
+						}
+					}
 				} elseif ($col == 3) {
-					$P4 = $Products[4];
-					$P5 = $Products[5];
-					$html .= $this->CreateSwapSlide($P4, $P5);
+
+					if ((int)isset($Products[4])) {
+						$P4 = $Products[4];
+						if ((int)isset($Products[5])) {
+							$P5 = $Products[5];
+							$html .= $this->CreateSwapItem($P4, $P5);
+						} else {
+							$html .= $this->CreateSwapItem($P4);
+						}
+					}
 				} elseif ($col == 4) {
-					$P6 = $Products[6];
-					$P7 = $Products[7];
-					$html .= $this->CreateSwapSlide($P6, $P7);
+
+					if ((int)isset($Products[6])) {
+						$P6 = $Products[6];
+						if ((int)isset($Products[7])) {
+							$P7 = $Products[7];
+							$html .= $this->CreateSwapItem($P6, $P7);
+						} else {
+							$html .= $this->CreateSwapItem($P6);
+						}
+					}
 				} elseif ($col == 5) {
-					$P8 = $Products[8];
-					$P9 = $Products[9];
-					$html .= $this->CreateSwapSlide($P8, $P9);
+
+					if ((int)isset($Products[8])) {
+						$P8 = $Products[8];
+						if ((int)isset($Products[9])) {
+							$P9 = $Products[9];
+							$html .= $this->CreateSwapItem($P8, $P9);
+						} else {
+							$html .= $this->CreateSwapItem($P8);
+						}
+					}
 				} elseif ($col == 6) {
-					$P10 = $Products[10];
-					$P11 = $Products[11];
-					$html .= $this->CreateSwapSlide($P10, $P11);
+
+					if ((int)isset($Products[10])) {
+						$P10 = $Products[10];
+						if ((int)isset($Products[11])) {
+							$P11 = $Products[11];
+							$html .= $this->CreateSwapItem($P10, $P11);
+						} else {
+							$html .= $this->CreateSwapItem($P10);
+						}
+					}
 				} elseif ($col == 7) {
-					$P12 = $Products[12];
-					$P13 = $Products[13];
-					$html .= $this->CreateSwapSlide($P12, $P13);
+
+					if ((int)isset($Products[12])) {
+						$P12 = $Products[12];
+						if ((int)isset($Products[13])) {
+							$P13 = $Products[13];
+							$html .= $this->CreateSwapItem($P12, $P13);
+						} else {
+							$html .= $this->CreateSwapItem($P12);
+						}
+					}
 				} elseif ($col == 8) {
-					$P14 = $Products[14];
-					$P15 = $Products[15];
-					$html .= $this->CreateSwapSlide($P14, $P15);
+
+					if ((int)isset($Products[14])) {
+						$P14 = $Products[14];
+						if ((int)isset($Products[15])) {
+							$P15 = $Products[15];
+							$html .= $this->CreateSwapItem($P14, $P15);
+						} else {
+							$html .= $this->CreateSwapItem($P14);
+						}
+					}
 				}
 			}
 		}
@@ -917,99 +971,249 @@ class Core extends Model
 	{
 		$Products = array();
 		$html = "";
-		$col = 1;
-		$products_2cat = mysqli_query($this->dbCon, "SELECT * FROM golojan_products WHERE enabled=1 ORDER BY RAND() LIMIT 16 ");
+		$products_2cat = mysqli_query($this->dbCon, "SELECT * FROM golojan_products WHERE subcategory='$category' ORDER BY RAND() LIMIT 16");
 		while ($prdt = mysqli_fetch_object($products_2cat)) {
 			$Products[] = $prdt;
 		}
-		$pcount = (int)count($Products);
-		
-
-		if($pcount){
+		$pcount = (int) (count($Products));
+		if ($pcount) {
 			for ($col = 0; $col <= $pcount; $col++) {
-				if ($col == 1) {
-					$P0 = $Products[0];
-					$P1 = $Products[1];
-					$html .= $this->CreateSwapSlide($P0, $P1);
+				if ($col == 0) {
+					$html .= "";
+				} elseif ($col == 1) {
+
+					if ((int)isset($Products[0])) {
+						$P0 = $Products[0];
+						if ((int)isset($Products[1])) {
+							$P1 = $Products[1];
+							$html .= $this->CreateSwapItem($P0, $P1);
+						} else {
+							$html .= $this->CreateSwapItem($P0);
+						}
+					}
 				} elseif ($col == 2) {
-					$P2 = $Products[2];
-					$P3 = $Products[3];
-					$html .= $this->CreateSwapSlide($P2, $P3);
+
+					if ((int)isset($Products[2])) {
+						$P2 = $Products[2];
+						if ((int)isset($Products[3])) {
+							$P3 = $Products[3];
+							$html .= $this->CreateSwapItem($P2, $P3);
+						} else {
+							$html .= $this->CreateSwapItem($P2);
+						}
+					}
 				} elseif ($col == 3) {
-					$P4 = $Products[4];
-					$P5 = $Products[5];
-					$html .= $this->CreateSwapSlide($P4, $P5);
+
+					if ((int)isset($Products[4])) {
+						$P4 = $Products[4];
+						if ((int)isset($Products[5])) {
+							$P5 = $Products[5];
+							$html .= $this->CreateSwapItem($P4, $P5);
+						} else {
+							$html .= $this->CreateSwapItem($P4);
+						}
+					}
 				} elseif ($col == 4) {
-					$P6 = $Products[6];
-					$P7 = $Products[7];
-					$html .= $this->CreateSwapSlide($P6, $P7);
+
+					if ((int)isset($Products[6])) {
+						$P6 = $Products[6];
+						if ((int)isset($Products[7])) {
+							$P7 = $Products[7];
+							$html .= $this->CreateSwapItem($P6, $P7);
+						} else {
+							$html .= $this->CreateSwapItem($P6);
+						}
+					}
 				} elseif ($col == 5) {
-					$P8 = $Products[8];
-					$P9 = $Products[9];
-					$html .= $this->CreateSwapSlide($P8, $P9);
+
+					if ((int)isset($Products[8])) {
+						$P8 = $Products[8];
+						if ((int)isset($Products[9])) {
+							$P9 = $Products[9];
+							$html .= $this->CreateSwapItem($P8, $P9);
+						} else {
+							$html .= $this->CreateSwapItem($P8);
+						}
+					}
 				} elseif ($col == 6) {
-					$P10 = $Products[10];
-					$P11 = $Products[11];
-					$html .= $this->CreateSwapSlide($P10, $P11);
+
+					if ((int)isset($Products[10])) {
+						$P10 = $Products[10];
+						if ((int)isset($Products[11])) {
+							$P11 = $Products[11];
+							$html .= $this->CreateSwapItem($P10, $P11);
+						} else {
+							$html .= $this->CreateSwapItem($P10);
+						}
+					}
 				} elseif ($col == 7) {
-					$P12 = $Products[12];
-					$P13 = $Products[13];
-					$html .= $this->CreateSwapSlide($P12, $P13);
+
+					if ((int)isset($Products[12])) {
+						$P12 = $Products[12];
+						if ((int)isset($Products[13])) {
+							$P13 = $Products[13];
+							$html .= $this->CreateSwapItem($P12, $P13);
+						} else {
+							$html .= $this->CreateSwapItem($P12);
+						}
+					}
 				} elseif ($col == 8) {
-					$P14 = $Products[14];
-					$P15 = $Products[15];
-					$html .= $this->CreateSwapSlide($P14, $P15);
+
+					if ((int)isset($Products[14])) {
+						$P14 = $Products[14];
+						if ((int)isset($Products[15])) {
+							$P15 = $Products[15];
+							$html .= $this->CreateSwapItem($P14, $P15);
+						} else {
+							$html .= $this->CreateSwapItem($P14);
+						}
+					}
 				}
 			}
 		}
 		return $html;
-
 	}
-	public function CreateSwapSlide($p1, $p2)
+
+
+	public function CreateSwapSlide($p1, $p2, $pcount = 0)
 	{
 
 		$Slug = new Slugify();
-		
+
 		$html = "";
 		$html .= "<div class=\"swiper-slide\">";
 
-		$html .= "<!-- media-list -->";
-		$html .= "<div class=\"media-list mb-4\">";
-		$html .= "<div class=\"media\">";
-		$html .= "<a class=\"thumb\" href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\"><img style=\"width:105px;\" src=\"{$p1->photo}\">";
-		$html .= "</a>";
-		$html .= "<div class=\"media-body\">";
-		$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p1->category, 'category') . "</a>";
-		$html .= "<h3 class=\"product-title\">";
-		$html .= "<a href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\">{$p1->name}</a>";
-		$html .= "</h3>";
-		$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p1->selling) . "</span>";
-		$html .= "</div>";
-		$html .= "</div>";
-		$html .= "</div>";
-		$html .= "<!-- media-list end -->";
-		
+		switch ($pcount) {
+			case 0:
+				# code...
+				break;
+			case 1:
+				$html .= "<!-- media-list -->";
+				$html .= "<div class=\"media-list mb-4\">";
+				$html .= "<div class=\"media\">";
+				$html .= "<a class=\"thumb\" href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\"><img style=\"width:105px;\" src=\"{$p1->photo}\">";
+				$html .= "</a>";
+				$html .= "<div class=\"media-body\">";
+				$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p1->category, 'category') . "</a>";
+				$html .= "<h3 class=\"product-title\">";
+				$html .= "<a href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\">{$p1->name}</a>";
+				$html .= "</h3>";
+				$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p1->selling) . "</span>";
+				$html .= "</div>";
+				$html .= "</div>";
+				$html .= "</div>";
+				$html .= "<!-- media-list end -->";
+				break;
+			case 2:
+				$html .= "<!-- media-list -->";
+				$html .= "<div class=\"media-list mb-4\">";
+				$html .= "<div class=\"media\">";
+				$html .= "<a class=\"thumb\" href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\"><img style=\"width:105px;\" src=\"{$p1->photo}\">";
+				$html .= "</a>";
+				$html .= "<div class=\"media-body\">";
+				$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p1->category, 'category') . "</a>";
+				$html .= "<h3 class=\"product-title\">";
+				$html .= "<a href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\">{$p1->name}</a>";
+				$html .= "</h3>";
+				$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p1->selling) . "</span>";
+				$html .= "</div>";
+				$html .= "</div>";
+				$html .= "</div>";
+				$html .= "<!-- media-list end -->";
 
-		$html .= "<!-- media-list -->";
-		$html .= "<div class=\"media-list\">";
-		$html .= "<div class=\"media\">";
-		$html .= "<a class=\"thumb\" href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\"><img style=\"width:105px;\" src=\"{$p2->photo}\">";
-		$html .= "</a>";
-		$html .= "<div class=\"media-body\">";
-		$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p2->category, 'category') . "</a>";
-		$html .= "<h3 class=\"product-title\">";
-		$html .= "<a href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\">{$p2->name}</a>";
-		$html .= "</h3>";
-		$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p2->selling) . "</span>";
-		$html .= "</div>";
-		$html .= "</div>";
-		$html .= "</div>";
-		$html .= "<!-- media-list end -->";
+				$html .= "<!-- media-list -->";
+				$html .= "<div class=\"media-list\">";
+				$html .= "<div class=\"media\">";
+				$html .= "<a class=\"thumb\" href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\"><img style=\"width:105px;\" src=\"{$p2->photo}\">";
+				$html .= "</a>";
+				$html .= "<div class=\"media-body\">";
+				$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p2->category, 'category') . "</a>";
+				$html .= "<h3 class=\"product-title\">";
+				$html .= "<a href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\">{$p2->name}</a>";
+				$html .= "</h3>";
+				$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p2->selling) . "</span>";
+				$html .= "</div>";
+				$html .= "</div>";
+				$html .= "</div>";
+				$html .= "<!-- media-list end -->";
+
+				break;
+		}
+
 
 		$html .= "</div>";
 
 		return $html;
 	}
+
+
+	public function CreateSwapItem($p1, $p2 = null)
+	{
+
+		$Slug = new Slugify();
+
+		$html = "";
+		$html .= "<div class=\"swiper-slide\">";
+
+		if ($p2 == null) {
+
+			$html .= "<!-- media-list -->";
+			$html .= "<div class=\"media-list mb-4\">";
+			$html .= "<div class=\"media\">";
+			$html .= "<a class=\"thumb\" href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\"><img style=\"width:105px;\" src=\"{$p1->photo}\">";
+			$html .= "</a>";
+			$html .= "<div class=\"media-body\">";
+			$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p1->category, 'category') . "</a>";
+			$html .= "<h3 class=\"product-title\">";
+			$html .= "<a href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\">{$p1->name}</a>";
+			$html .= "</h3>";
+			$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p1->selling) . "</span>";
+			$html .= "</div>";
+			$html .= "</div>";
+			$html .= "</div>";
+			$html .= "<!-- media-list end -->";
+
+		} else {
+
+			$html .= "<!-- media-list -->";
+			$html .= "<div class=\"media-list mb-4\">";
+			$html .= "<div class=\"media\">";
+			$html .= "<a class=\"thumb\" href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\"><img style=\"width:105px;\" src=\"{$p1->photo}\">";
+			$html .= "</a>";
+			$html .= "<div class=\"media-body\">";
+			$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p1->category, 'category') . "</a>";
+			$html .= "<h3 class=\"product-title\">";
+			$html .= "<a href=\"/product/{$p1->id}/" .  $Slug->slugify($p1->name) . "/\">{$p1->name}</a>";
+			$html .= "</h3>";
+			$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p1->selling) . "</span>";
+			$html .= "</div>";
+			$html .= "</div>";
+			$html .= "</div>";
+			$html .= "<!-- media-list end -->";
+
+
+			$html .= "<!-- media-list -->";
+			$html .= "<div class=\"media-list\">";
+			$html .= "<div class=\"media\">";
+			$html .= "<a class=\"thumb\" href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\"><img style=\"width:105px;\" src=\"{$p2->photo}\">";
+			$html .= "</a>";
+			$html .= "<div class=\"media-body\">";
+			$html .= "<a class=\"product-category\" href=\"#?\">" .  $this->CategoryInfo($p2->category, 'category') . "</a>";
+			$html .= "<h3 class=\"product-title\">";
+			$html .= "<a href=\"/product/{$p2->id}/" .  $Slug->slugify($p2->name) . "/\">{$p2->name}</a>";
+			$html .= "</h3>";
+			$html .= "<span class=\"price-lg regular-price\">" . $this->ToMoney($p2->selling) . "</span>";
+			$html .= "</div>";
+			$html .= "</div>";
+			$html .= "</div>";
+			$html .= "<!-- media-list end -->";
+		}
+
+		$html .= "</div>";
+
+		return $html;
+	}
+
 
 
 	public function MainCategories()

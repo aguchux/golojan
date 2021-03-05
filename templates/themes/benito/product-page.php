@@ -20,21 +20,15 @@
                 <div class="product-detail_img vertical-slider_wrap2">
                     <div class="swiper-container pd-vertical_slider2 lightgallery">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="assets/images/products/product2.jpg" alt="Product Image">
+
+                            <?php foreach ($Photos_1 as $photo1) : ?>
+                                <div class="swiper-slide p-2">
+                                    <div class="single-img">
+                                        <img src="<?= $photo1 ?>" style="width: 350px;">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="assets/images/products/product3.jpg" alt="Product Image">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="assets/images/products/product4.jpg" alt="Product Image">
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
+
                         </div>
                     </div>
 
@@ -48,17 +42,15 @@
                             </div>
                         </div>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <a href="#?">
-                                    <img src="assets/images/products/small/2.jpg" alt="Product Thumnail"></a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="#?">
-                                    <img src="assets/images/products/small/3.jpg" alt="Product Thumnail"></a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="#?"><img src="assets/images/products/small/4.jpg" alt="Product Thumnail"></a>
-                            </div>
+
+                            <?php foreach ($Photos_2 as $photo2) : ?>
+                                <div class="swiper-slide p-3">
+                                    <a href="javascript:;">
+                                    <img src="<?= $photo2 ?>" style="height: 105px;">
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+
                         </div>
                     </div>
                 </div>
@@ -140,8 +132,8 @@
                         <div class="single-product-desc">
                             <div class="product-anotherinfo-wrapper">
                                 <ul>
-                                    <?php while($feature = mysqli_fetch_object($ProductFeatures)): ?>
-                                    <li><span><?= $feature->feature_key ?></span> <?= $feature->feature_value ?></li>
+                                    <?php while ($feature = mysqli_fetch_object($ProductFeatures)) : ?>
+                                        <li><span><?= $feature->feature_key ?></span> <?= $feature->feature_value ?></li>
                                     <?php endwhile; ?>
                                 </ul>
                             </div>
@@ -264,6 +256,6 @@
             </div>
         </div>
 
-        
+
     </div>
 </div>
